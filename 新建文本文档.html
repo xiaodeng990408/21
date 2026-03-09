@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>旅行 APP 高保真原型</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* 模拟手机屏幕比例 */
+    .phone-frame {
+      background: #0f172a;
+      border-radius: 2.5rem;
+      padding: 0.75rem;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.75);
+    }
+    .phone-inner {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background: #0b1120;
+    }
+    .phone-notch {
+      width: 40%;
+      height: 0.6rem;
+      border-radius: 9999px;
+      background: rgba(15,23,42,0.85);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+
+  <!-- 顶部导航：跳转到各个原型区块 -->
+  <header class="sticky top-0 z-30 bg-slate-950/90 backdrop-blur border-b border-slate-800">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-sky-500 to-emerald-400 text-slate-950 font-semibold text-lg">
+          T
+        </span>
+        <div class="text-sm">
+          <div class="font-semibold tracking-tight">TravelGo 原型</div>
+          <div class="text-xs text-slate-400">Tailwind 高保真移动端</div>
+        </div>
+      </div>
+      <nav class="hidden md:flex gap-3 text-xs">
+        <a href="#onboarding" class="px-2 py-1 rounded-full bg-slate-800 hover:bg-slate-700">引导 & 登录</a>
+        <a href="#home" class="px-2 py-1 rounded-full hover:bg-slate-800">首页 & 搜索</a>
+        <a href="#detail" class="px-2 py-1 rounded-full hover:bg-slate-800">详情 & 预订</a>
+        <a href="#booking" class="px-2 py-1 rounded-full hover:bg-slate-800">下单 & 支付</a>
+        <a href="#trips" class="px-2 py-1 rounded-full hover:bg-slate-800">行程 & 通知</a>
+        <a href="#profile" class="px-2 py-1 rounded-full hover:bg-slate-800">个人中心</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+
+    <!-- 说明区 -->
+    <section class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+      <h2 class="text-lg font-semibold mb-2">旅行 APP 高保真原型总览</h2>
+      <p class="text-sm text-slate-300 mb-3">
+        本页面在一个 HTML 文件中展示了旅行类 APP 的所有核心页面原型，每个页面为一个独立的“手机屏幕”。
+        使用 Tailwind CSS + Font Awesome + Unsplash 图片，可直接拆分为组件用于实际项目开发。
+      </p>
+      <div class="flex flex-wrap gap-2 text-xs text-slate-300">
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">引导 / 登录</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">首页 / 搜索</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">目的地详情</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">预订流程</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">支付 & 结果</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">行程 & 订单</span>
+        <span class="px-2 py-1 rounded-full bg-slate-800/80">个人中心</span>
+      </div>
+    </section>
+
+    <!-- 引导 & 登录 -->
+    <section id="onboarding" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">引导 / 登录模块</h3>
+        <span class="text-xs text-slate-400">Onboarding · Auth</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 引导页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="relative flex-1 bg-slate-950">
+              <div class="absolute inset-0">
+                <img
+                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+                  alt="海岛"
+                  class="w-full h-full object-cover opacity-70"
+                />
+              </div>
+              <div class="relative z-10 flex flex-col justify-between h-full px-5 pb-6 pt-3 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-slate-950/10">
+                <!-- 顶部状态栏 -->
+                <div class="flex items-center justify-between text-[10px] text-slate-200">
+                  <span>9:41</span>
+                  <div class="flex items-center gap-1 opacity-80">
+                    <i class="fa-solid fa-signal"></i>
+                    <i class="fa-solid fa-wifi"></i>
+                    <i class="fa-solid fa-battery-full"></i>
+                  </div>
+                </div>
+
+                <!-- 中部品牌文案 -->
+                <div class="mt-10">
+                  <div class="inline-flex items-center rounded-full bg-slate-900/70 px-3 py-1 text-[10px] text-sky-200 border border-sky-500/40">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i>
+                    即刻发现下一程旅行
+                  </div>
+                  <h1 class="mt-4 text-3xl font-semibold tracking-tight">
+                    TravelGo<br>
+                    <span class="text-sky-300">一键预订世界之美</span>
+                  </h1>
+                  <p class="mt-3 text-xs text-slate-200/80 leading-relaxed">
+                    精选全球目的地·智能推荐你的专属行程。
+                    航班、酒店、玩法，一站式预订无忧出行。
+                  </p>
+                </div>
+
+                <!-- 底部操作 -->
+                <div class="space-y-3">
+                  <button class="w-full py-2.5 text-sm font-medium rounded-full bg-gradient-to-r from-sky-500 to-emerald-400 text-slate-950 shadow-lg shadow-sky-500/30">
+                    使用手机号开始
+                  </button>
+                  <button class="w-full py-2 text-xs font-medium rounded-full border border-slate-500/80 bg-slate-900/70 text-slate-100">
+                    已有账号？登录
+                  </button>
+                  <p class="text-[10px] text-slate-400 text-center">
+                    登录即代表你同意
+                    <span class="underline">用户协议</span> 和
+                    <span class="underline">隐私政策</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 登录页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-5">
+              <!-- 顶部栏 -->
+              <div class="flex items-center justify-between text-[11px] text-slate-300">
+                <span>9:41</span>
+                <span>TravelGo</span>
+                <div class="flex items-center gap-1 opacity-80">
+                  <i class="fa-solid fa-signal"></i>
+                  <i class="fa-solid fa-battery-full"></i>
+                </div>
+              </div>
+
+              <!-- 标题 -->
+              <div class="mt-6">
+                <h2 class="text-xl font-semibold">欢迎回来</h2>
+                <p class="mt-1 text-xs text-slate-400">
+                  登录以同步你的行程和预订信息。
+                </p>
+              </div>
+
+              <!-- 表单 -->
+              <form class="mt-5 space-y-4 text-xs">
+                <div>
+                  <label class="block mb-1 text-slate-300">邮箱 / 手机号</label>
+                  <div class="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2">
+                    <i class="fa-regular fa-envelope text-slate-400 text-xs"></i>
+                    <input
+                      type="text"
+                      placeholder="example@email.com"
+                      class="bg-transparent border-none outline-none text-xs flex-1 placeholder:text-slate-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block mb-1 text-slate-300">密码</label>
+                  <div class="flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2">
+                    <i class="fa-solid fa-lock text-slate-400 text-xs"></i>
+                    <input
+                      type="password"
+                      placeholder="不少于 8 位"
+                      class="bg-transparent border-none outline-none text-xs flex-1 placeholder:text-slate-500"
+                    />
+                    <button type="button" class="text-[10px] text-sky-400">
+                      显示
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <label class="inline-flex items-center gap-1 text-[11px] text-slate-300">
+                    <input type="checkbox" class="rounded border-slate-500 bg-slate-900" checked />
+                    记住我
+                  </label>
+                  <button type="button" class="text-[11px] text-sky-400">
+                    忘记密码？
+                  </button>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full py-2.5 rounded-xl bg-sky-500 text-slate-950 font-medium text-xs shadow-md shadow-sky-500/40"
+                >
+                  登录
+                </button>
+                <div class="flex items-center gap-2 py-1">
+                  <div class="flex-1 h-px bg-slate-700"></div>
+                  <span class="text-[10px] text-slate-500">或使用第三方登录</span>
+                  <div class="flex-1 h-px bg-slate-700"></div>
+                </div>
+                <div class="flex justify-center gap-4 text-lg text-slate-300">
+                  <button type="button" class="h-9 w-9 rounded-full border border-slate-600 flex items-center justify-center">
+                    <i class="fa-brands fa-apple"></i>
+                  </button>
+                  <button type="button" class="h-9 w-9 rounded-full border border-slate-600 flex items-center justify-center">
+                    <i class="fa-brands fa-google"></i>
+                  </button>
+                  <button type="button" class="h-9 w-9 rounded-full border border-slate-600 flex items-center justify-center">
+                    <i class="fa-brands fa-weixin"></i>
+                  </button>
+                </div>
+                <p class="text-[11px] text-center text-slate-400">
+                  还没有账号？
+                  <span class="text-sky-400 font-medium">立即注册</span>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- 注册页（简化） -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-5">
+              <div class="flex items-center justify-between text-[11px] text-slate-300">
+                <button class="text-xs text-slate-300">
+                  <i class="fa-solid fa-chevron-left text-[10px] mr-1"></i> 返回
+                </button>
+                <span class="text-[11px] text-slate-400">创建账号</span>
+                <span class="text-[11px] text-slate-400">帮助</span>
+              </div>
+
+              <div class="mt-5">
+                <h2 class="text-xl font-semibold">注册 TravelGo</h2>
+                <p class="mt-1 text-xs text-slate-400">
+                  仅需 1 分钟完成注册，开启你的旅程。
+                </p>
+              </div>
+
+              <form class="mt-4 space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block mb-1 text-slate-300">姓名</label>
+                    <input
+                      type="text"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 outline-none"
+                      placeholder="张三"
+                    />
+                  </div>
+                  <div>
+                    <label class="block mb-1 text-slate-300">昵称</label>
+                    <input
+                      type="text"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 outline-none"
+                      placeholder="Travel Lover"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block mb-1 text-slate-300">邮箱</label>
+                  <input
+                    type="email"
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 outline-none"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div>
+                  <label class="block mb-1 text-slate-300">手机号</label>
+                  <div class="flex gap-2">
+                    <select class="w-20 rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-[11px]">
+                      <option>+86</option>
+                      <option>+1</option>
+                      <option>+81</option>
+                    </select>
+                    <input
+                      type="tel"
+                      class="flex-1 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 outline-none"
+                      placeholder="请输入手机号"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block mb-1 text-slate-300">密码</label>
+                  <input
+                    type="password"
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 outline-none"
+                    placeholder="至少 8 位，包含数字和字母"
+                  />
+                </div>
+                <label class="flex items-start gap-2 mt-1 text-[10px] text-slate-400">
+                  <input type="checkbox" class="mt-[2px] rounded border-slate-500 bg-slate-900" checked />
+                  我已阅读并同意
+                  <span class="text-sky-400 underline">用户协议</span> 和
+                  <span class="text-sky-400 underline">隐私政策</span>
+                </label>
+                <button
+                  type="submit"
+                  class="mt-1 w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-sky-500 text-slate-950 font-medium text-xs shadow-md shadow-emerald-400/40"
+                >
+                  创建账号
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 首页 & 搜索 -->
+    <section id="home" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">首页 / 搜索 / 列表</h3>
+        <span class="text-xs text-slate-400">Home · Search · Results</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 首页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <!-- 顶部 notch -->
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <!-- 顶部栏 -->
+              <div class="flex items-center justify-between px-4 pt-1 text-[11px] text-slate-300">
+                <div class="flex items-center gap-1">
+                  <i class="fa-solid fa-location-dot text-sky-400 text-xs"></i>
+                  <span>当前城市</span>
+                  <span class="font-medium text-slate-100">上海</span>
+                  <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button class="h-6 w-6 flex items-center justify-center rounded-full bg-slate-800">
+                    <i class="fa-regular fa-bell text-[10px]"></i>
+                  </button>
+                  <img
+                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80"
+                    class="h-6 w-6 rounded-full object-cover"
+                    alt="avatar"
+                  />
+                </div>
+              </div>
+
+              <!-- 搜索框 -->
+              <div class="px-4 mt-3">
+                <div class="flex items-center gap-2 rounded-2xl bg-slate-900 border border-slate-700 px-3 py-2">
+                  <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
+                  <input
+                    type="text"
+                    placeholder="搜索目的地、城市或酒店"
+                    class="bg-transparent flex-1 border-none outline-none text-[11px] placeholder:text-slate-500"
+                  />
+                  <button class="px-2 py-1 rounded-full bg-slate-800 text-[10px] text-slate-200 flex items-center gap-1">
+                    <i class="fa-regular fa-calendar text-[9px]"></i>
+                    日期
+                  </button>
+                </div>
+                <div class="flex gap-2 mt-2 text-[10px]">
+                  <span class="px-2 py-1 rounded-full bg-slate-800/80 text-sky-300">春季热门</span>
+                  <span class="px-2 py-1 rounded-full bg-slate-800/80 text-slate-300">亲子游</span>
+                  <span class="px-2 py-1 rounded-full bg-slate-800/80 text-slate-300">周末短途</span>
+                </div>
+              </div>
+
+              <!-- Banner -->
+              <div class="px-4 mt-4">
+                <div class="relative rounded-2xl overflow-hidden h-36">
+                  <img
+                    src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=800&q=80"
+                    alt="mountain"
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/40 to-transparent"></div>
+                  <div class="absolute inset-y-0 left-0 px-4 py-3 flex flex-col justify-between">
+                    <div class="text-[10px] text-emerald-300 font-medium inline-flex items-center gap-1">
+                      <i class="fa-solid fa-fire text-[9px] text-amber-400"></i>
+                      限时 7 折 · 春季特惠
+                    </div>
+                    <div>
+                      <h3 class="text-sm font-semibold">阿尔卑斯雪山·轻徒步 5 日游</h3>
+                      <p class="text-[11px] text-slate-200/80 mt-1">
+                        精选精品小团 · 含往返机票 & 四星酒店。
+                      </p>
+                      <div class="mt-2 flex items-center justify-between text-[11px]">
+                        <div class="flex items-baseline gap-1">
+                          <span class="text-emerald-300 text-lg font-semibold">¥5,299</span>
+                          <span class="text-slate-400 line-through text-[10px]">¥7,199</span>
+                        </div>
+                        <button class="px-3 py-1 rounded-full bg-emerald-400 text-slate-950 text-[10px] font-medium">
+                          立即抢购
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 推荐目的地 -->
+              <div class="px-4 mt-4 mb-3">
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <span class="font-medium">为你推荐</span>
+                  <button class="text-sky-400 flex items-center gap-1">
+                    查看全部
+                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                  </button>
+                </div>
+                <div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+                  <div class="min-w-[120px] rounded-xl overflow-hidden bg-slate-900/90 border border-slate-700/80">
+                    <div class="relative h-20">
+                      <img
+                        src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=400&q=80"
+                        class="w-full h-full object-cover"
+                        alt="Tokyo"
+                      />
+                      <span class="absolute top-1 right-1 px-1.5 py-0.5 rounded-full bg-slate-950/80 text-[9px]">
+                        <i class="fa-solid fa-star text-amber-400 mr-0.5"></i>4.8
+                      </span>
+                    </div>
+                    <div class="px-2 pb-2 pt-1.5">
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-medium">东京 · 城市漫游</span>
+                        <button class="text-slate-400">
+                          <i class="fa-regular fa-heart"></i>
+                        </button>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">经典景点 + 小众街区</p>
+                      <p class="text-[11px] text-emerald-300 mt-1">¥3,999 起</p>
+                    </div>
+                  </div>
+                  <div class="min-w-[120px] rounded-xl overflow-hidden bg-slate-900/90 border border-slate-700/80">
+                    <div class="relative h-20">
+                      <img
+                        src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=400&q=80"
+                        class="w-full h-full object-cover"
+                        alt="Paris"
+                      />
+                      <span class="absolute top-1 right-1 px-1.5 py-0.5 rounded-full bg-slate-950/80 text-[9px]">
+                        <i class="fa-solid fa-star text-amber-400 mr-0.5"></i>4.9
+                      </span>
+                    </div>
+                    <div class="px-2 pb-2 pt-1.5">
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-medium">巴黎 · 浪漫之都</span>
+                        <button class="text-rose-400">
+                          <i class="fa-solid fa-heart"></i>
+                        </button>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">塞纳河游船 + 艺术</p>
+                      <p class="text-[11px] text-emerald-300 mt-1">¥6,299 起</p>
+                    </div>
+                  </div>
+                  <div class="min-w-[120px] rounded-xl overflow-hidden bg-slate-900/90 border border-slate-700/80">
+                    <div class="relative h-20">
+                      <img
+                        src="https://images.unsplash.com/photo-1519817650390-64a93db511aa?auto=format&fit=crop&w=400&q=80"
+                        class="w-full h-full object-cover"
+                        alt="Bali"
+                      />
+                      <span class="absolute top-1 right-1 px-1.5 py-0.5 rounded-full bg-slate-950/80 text-[9px]">
+                        <i class="fa-solid fa-star text-amber-400 mr-0.5"></i>4.7
+                      </span>
+                    </div>
+                    <div class="px-2 pb-2 pt-1.5">
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-medium">巴厘岛 · 海岛度假</span>
+                        <button class="text-slate-400">
+                          <i class="fa-regular fa-heart"></i>
+                        </button>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">五星海景酒店</p>
+                      <p class="text-[11px] text-emerald-300 mt-1">¥4,599 起</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 底部 Tab -->
+              <div class="border-t border-slate-800 bg-slate-950/95 px-6 py-2 flex items-center justify-between text-[10px] text-slate-400">
+                <button class="flex flex-col items-center text-sky-400">
+                  <i class="fa-solid fa-house text-sm mb-0.5"></i>
+                  首页
+                </button>
+                <button class="flex flex-col items-center">
+                  <i class="fa-regular fa-compass text-sm mb-0.5"></i>
+                  发现
+                </button>
+                <button class="flex flex-col items-center">
+                  <i class="fa-regular fa-bookmark text-sm mb-0.5"></i>
+                  收藏
+                </button>
+                <button class="flex flex-col items-center">
+                  <i class="fa-regular fa-user text-sm mb-0.5"></i>
+                  我的
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 搜索结果列表 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <!-- 顶部搜索和筛选 -->
+              <div class="px-4 pt-3">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-900">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div class="flex-1 flex items-center gap-2 rounded-full bg-slate-900 border border-slate-700 px-3 py-1.5">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-[10px]"></i>
+                    <input
+                      type="text"
+                      class="bg-transparent flex-1 border-none outline-none text-[11px]"
+                      value="东京 自由行"
+                    />
+                  </div>
+                </div>
+                <div class="mt-2 flex items-center justify-between text-[10px]">
+                  <div class="flex items-center gap-1 text-slate-400">
+                    <i class="fa-regular fa-calendar text-[10px]"></i>
+                    <span>4 月 12 日 - 4 月 18 日 · 2 人</span>
+                  </div>
+                  <button class="flex items-center gap-1 px-2 py-1 rounded-full bg-slate-900 text-slate-200 border border-slate-700">
+                    <i class="fa-solid fa-sliders text-[9px]"></i>
+                    筛选
+                  </button>
+                </div>
+                <div class="mt-2 flex gap-2 text-[10px]">
+                  <button class="px-2 py-1 rounded-full bg-sky-500 text-slate-950">推荐排序</button>
+                  <button class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">价格从低到高</button>
+                  <button class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">评分 4.5+ </button>
+                </div>
+              </div>
+
+              <!-- 列表 -->
+              <div class="mt-3 px-3 pb-2 space-y-3 overflow-y-auto">
+                <!-- 卡片 1 -->
+                <div class="flex gap-2 rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden">
+                  <div class="w-24 relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1554797589-7241bb691973?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Tokyo hotel"
+                    />
+                    <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-emerald-400 text-slate-950 text-[9px] font-medium">
+                      热卖
+                    </span>
+                  </div>
+                  <div class="flex-1 py-2 pr-2">
+                    <div class="flex items-start justify-between">
+                      <h4 class="text-[12px] font-medium leading-tight line-clamp-2">
+                        东京新宿市中心 · 四星酒店 5 晚连住
+                      </h4>
+                      <button class="text-[11px] text-slate-400 ml-1">
+                        <i class="fa-regular fa-bookmark"></i>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-0.5">近 JR 站 · 含早餐 · 免费 Wi-Fi</p>
+                    <div class="flex items-center gap-1 mt-1 text-[10px]">
+                      <span class="text-amber-400">
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <span>4.8</span>
+                      <span class="text-slate-500">(326 条评价)</span>
+                    </div>
+                    <div class="flex items-center justify-between mt-1.5">
+                      <div class="flex flex-col text-[11px]">
+                        <span class="text-emerald-300 font-semibold">¥4,299</span>
+                        <span class="text-slate-500 text-[9px]">含税费 · 每人</span>
+                      </div>
+                      <button class="px-2.5 py-1 rounded-full bg-sky-500 text-slate-950 text-[10px] font-medium">
+                        查看详情
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 卡片 2 -->
+                <div class="flex gap-2 rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden">
+                  <div class="w-24 relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Tokyo day tour"
+                    />
+                    <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-slate-950/80 text-emerald-300 text-[9px]">
+                      小团
+                    </span>
+                  </div>
+                  <div class="flex-1 py-2 pr-2">
+                    <div class="flex items-start justify-between">
+                      <h4 class="text-[12px] font-medium leading-tight line-clamp-2">
+                        东京经典一日游 · 浅草寺 + 晴空塔 + 台场
+                      </h4>
+                      <button class="text-[11px] text-rose-400 ml-1">
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-0.5">中文导游 · 含午餐 · 酒店接送</p>
+                    <div class="flex items-center gap-1 mt-1 text-[10px]">
+                      <span class="text-amber-400">
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <span>4.9</span>
+                      <span class="text-slate-500">(1,024 条评价)</span>
+                    </div>
+                    <div class="flex items-center justify-between mt-1.5">
+                      <div class="flex flex-col text-[11px]">
+                        <span class="text-emerald-300 font-semibold">¥799</span>
+                        <span class="text-slate-500 text-[9px]">今日可订</span>
+                      </div>
+                      <button class="px-2.5 py-1 rounded-full bg-slate-900 border border-sky-500 text-sky-400 text-[10px] font-medium">
+                        立即预订
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="flex gap-2 rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden">
+                  <div class="w-24 relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Tokyo pass"
+                    />
+                    <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded-full bg-sky-500 text-slate-950 text-[9px]">
+                      极速出票
+                    </span>
+                  </div>
+                  <div class="flex-1 py-2 pr-2">
+                    <div class="flex items-start justify-between">
+                      <h4 class="text-[12px] font-medium leading-tight line-clamp-2">
+                        东京地铁 72 小时通票 · 电子票
+                      </h4>
+                      <button class="text-[11px] text-slate-400 ml-1">
+                        <i class="fa-regular fa-bookmark"></i>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-0.5">即时发送二维码 · 覆盖 13 条线路</p>
+                    <div class="flex items-center gap-1 mt-1 text-[10px]">
+                      <span class="text-amber-400">
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <span>4.6</span>
+                      <span class="text-slate-500">(872 条评价)</span>
+                    </div>
+                    <div class="flex items-center justify-between mt-1.5">
+                      <div class="flex flex-col text-[11px]">
+                        <span class="text-emerald-300 font-semibold">¥129</span>
+                        <span class="text-slate-500 text-[9px]">电子票 · 不可退</span>
+                      </div>
+                      <button class="px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400 text-[10px] font-medium border border-sky-500/40">
+                        加入行程
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 目的地聚合 / 发现页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-3">
+              <div class="flex items-center justify-between text-[12px]">
+                <h2 class="font-semibold">发现目的地</h2>
+                <button class="flex items-center gap-1 text-[11px] text-slate-400">
+                  <i class="fa-regular fa-map text-[10px]"></i>
+                  地图模式
+                </button>
+              </div>
+
+              <div class="mt-3 grid grid-cols-2 gap-3 text-[11px]">
+                <!-- 卡片 -->
+                <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+                  <div class="relative h-20">
+                    <img
+                      src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Kyoto"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
+                    <div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px]">
+                      <span class="font-medium">京都 · 古都风情</span>
+                      <span class="px-1.5 py-0.5 rounded-full bg-emerald-400 text-slate-950">人气榜 1</span>
+                    </div>
+                  </div>
+                  <div class="px-2 py-1.5">
+                    <p class="text-[10px] text-slate-400">寺庙庭院 · 和服体验</p>
+                    <p class="text-[10px] text-emerald-300 mt-1">¥3,499 起</p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+                  <div class="relative h-20">
+                    <img
+                      src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Seaside"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
+                    <div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px]">
+                      <span class="font-medium">冲绳 · 海岛假期</span>
+                      <span class="px-1.5 py-0.5 rounded-full bg-sky-500 text-slate-950">亲子优选</span>
+                    </div>
+                  </div>
+                  <div class="px-2 py-1.5">
+                    <p class="text-[10px] text-slate-400">浮潜 · 海景酒店</p>
+                    <p class="text-[10px] text-emerald-300 mt-1">¥4,099 起</p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+                  <div class="relative h-20">
+                    <img
+                      src="https://images.unsplash.com/photo-1500534314211-0a24cd03f2c0?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Snow"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
+                    <div class="absolute bottom-1 left-1.5 right-1.5 flex items-center justify-between text-[10px]">
+                      <span class="font-medium">北海道 · 雪国温泉</span>
+                      <span class="px-1.5 py-0.5 rounded-full bg-slate-950/80 text-sky-300">冬季限定</span>
+                    </div>
+                  </div>
+                  <div class="px-2 py-1.5">
+                    <p class="text-[10px] text-slate-400">泡汤 · 滑雪 · 美食</p>
+                    <p class="text-[10px] text-emerald-300 mt-1">¥5,699 起</p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 flex flex-col items-center justify-center text-slate-300">
+                  <i class="fa-solid fa-ellipsis text-lg mb-1"></i>
+                  <p class="text-[10px] text-center px-2">查看更多目的地</p>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[10px] text-slate-400">
+                为你匹配
+                <span class="text-sky-400">城市漫游</span>、
+                <span class="text-sky-400">自然徒步</span> 与
+                <span class="text-sky-400">亲子度假</span> 等多种旅行主题。
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 详情 & 预订入口 -->
+    <section id="detail" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">目的地详情 / 图片 / 预订入口</h3>
+        <span class="text-xs text-slate-400">Destination Detail · Gallery</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 详情页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <!-- 顶部大图 -->
+              <div class="relative h-44">
+                <img
+                  src="https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=800&q=80"
+                  class="w-full h-full object-cover"
+                  alt="Tokyo night"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/20 to-slate-950/10"></div>
+                <div class="absolute top-2 left-3 right-3 flex items-center justify-between text-[11px] text-slate-200">
+                  <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-950/80">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div class="flex gap-2">
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-950/80">
+                      <i class="fa-regular fa-share-from-square text-[11px]"></i>
+                    </button>
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-950/80 text-rose-400">
+                      <i class="fa-regular fa-heart text-[11px]"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="absolute bottom-2 left-3 right-3 text-slate-50">
+                  <div class="inline-flex items-center gap-1 rounded-full bg-slate-950/80 px-2 py-0.5 text-[10px]">
+                    <i class="fa-solid fa-location-dot text-sky-400"></i>
+                    日本 · 东京
+                  </div>
+                  <h2 class="mt-1 text-lg font-semibold leading-tight">
+                    东京城市深度游 · 6 日 5 夜
+                  </h2>
+                  <p class="text-[10px] text-slate-200/90 mt-1">
+                    涵盖经典景点 + 小众街区 · 含酒店与交通。
+                  </p>
+                </div>
+              </div>
+
+              <!-- 内容滚动区 -->
+              <div class="flex-1 overflow-y-auto px-4 pt-3 pb-16 text-[11px] space-y-3">
+                <!-- 评分 & 标签 -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-1">
+                    <span class="text-amber-400 text-[12px]">
+                      <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="font-medium">4.8</span>
+                    <span class="text-slate-500">(1,236 条评价)</span>
+                  </div>
+                  <div class="flex gap-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-slate-900 text-emerald-300 border border-emerald-400/50">小团</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-900 text-sky-300 border border-sky-500/40">市中心酒店</span>
+                  </div>
+                </div>
+
+                <!-- 价格 -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-baseline gap-1">
+                    <span class="text-emerald-300 text-xl font-semibold">¥6,799</span>
+                    <span class="text-slate-500 text-[10px]">/ 人起 · 含税费</span>
+                  </div>
+                  <button class="text-[10px] text-sky-400 underline">
+                    查看价格日历
+                  </button>
+                </div>
+
+                <!-- 行程概要 -->
+                <div>
+                  <h3 class="font-semibold text-[11px] mb-1">行程亮点</h3>
+                  <ul class="space-y-1 text-[10px] text-slate-300">
+                    <li class="flex items-start gap-1.5">
+                      <i class="fa-regular fa-circle-check text-emerald-400 mt-[2px]"></i>
+                      白天城市经典景点，夜晚打卡小众酒吧与咖啡馆。
+                    </li>
+                    <li class="flex items-start gap-1.5">
+                      <i class="fa-regular fa-circle-check text-emerald-400 mt-[2px]"></i>
+                      住新宿/涩谷市中心四星酒店，交通便利，出门即繁华。
+                    </li>
+                    <li class="flex items-start gap-1.5">
+                      <i class="fa-regular fa-circle-check text-emerald-400 mt-[2px]"></i>
+                      全程中文领队，行前出行攻略打包给你。
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- 行程日程简要 -->
+                <div>
+                  <h3 class="font-semibold text-[11px] mb-1">行程日程概览</h3>
+                  <div class="space-y-1.5 text-[10px]">
+                    <div class="flex gap-2">
+                      <div class="w-10 text-slate-400">Day 1</div>
+                      <div class="flex-1 text-slate-300">
+                        抵达东京 · 机场接机 · 入住市中心酒店 · 自由活动。
+                      </div>
+                    </div>
+                    <div class="flex gap-2">
+                      <div class="w-10 text-slate-400">Day 2</div>
+                      <div class="flex-1 text-slate-300">
+                        浅草寺 · 秋叶原 · 晴空塔夜景。
+                      </div>
+                    </div>
+                    <div class="flex gap-2">
+                      <div class="w-10 text-slate-400">Day 3</div>
+                      <div class="flex-1 text-slate-300">
+                        镰仓一日游 · 江之电 · 海边日落。
+                      </div>
+                    </div>
+                    <button class="mt-1 text-sky-400 text-[10px]">
+                      查看完整行程
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 包含/不含 -->
+                <div class="grid grid-cols-2 gap-2 text-[10px]">
+                  <div class="rounded-xl bg-slate-900 border border-slate-800 p-2">
+                    <div class="flex items-center gap-1 mb-1">
+                      <i class="fa-solid fa-circle-plus text-emerald-400 text-[10px]"></i>
+                      <span class="font-medium">费用包含</span>
+                    </div>
+                    <ul class="list-disc ml-3 space-y-0.5 text-slate-300">
+                      <li>往返机票 & 行李额</li>
+                      <li>5 晚四星酒店住宿</li>
+                      <li>全程接送机 + 市内交通</li>
+                    </ul>
+                  </div>
+                  <div class="rounded-xl bg-slate-900 border border-slate-800 p-2">
+                    <div class="flex items-center gap-1 mb-1">
+                      <i class="fa-solid fa-circle-minus text-rose-400 text-[10px]"></i>
+                      <span class="font-medium">费用不含</span>
+                    </div>
+                    <ul class="list-disc ml-3 space-y-0.5 text-slate-300">
+                      <li>个人消费及购物</li>
+                      <li>单房差</li>
+                      <li>自选项目</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- 评价摘要 -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <h3 class="font-semibold text-[11px]">用户评价</h3>
+                    <button class="text-[10px] text-sky-400">查看全部</button>
+                  </div>
+                  <div class="flex items-center gap-2 text-[10px]">
+                    <div class="flex items-baseline gap-1">
+                      <span class="text-2xl font-semibold text-amber-400">4.8</span>
+                      <span class="text-slate-400">/ 5</span>
+                    </div>
+                    <div class="flex-1">
+                      <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                        <div class="h-full w-4/5 bg-amber-400"></div>
+                      </div>
+                      <p class="text-[10px] text-slate-400 mt-0.5">92% 用户推荐 · 交通便利  · 领队好评</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 底部预订栏 -->
+              <div class="absolute bottom-0 left-0 right-0 px-4 py-2.5 bg-slate-950/95 border-t border-slate-800 flex items-center justify-between text-[11px]">
+                <div>
+                  <p class="text-slate-400 text-[10px]">预估总价（2 人）</p>
+                  <p class="text-emerald-300 font-semibold">¥13,598</p>
+                </div>
+                <button class="px-4 py-1.5 rounded-full bg-sky-500 text-slate-950 font-medium flex items-center gap-1 shadow-md shadow-sky-500/40">
+                  <i class="fa-regular fa-calendar-check"></i>
+                  选择日期 & 预订
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 图片浏览 / 相册页（简化） -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-3 pt-3 pb-3">
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <span class="font-medium">行程照片</span>
+                </div>
+                <span class="text-slate-400">12 / 48</span>
+              </div>
+
+              <div class="rounded-2xl overflow-hidden h-40 relative mb-3">
+                <img
+                  src="https://images.unsplash.com/photo-1503899036084-7e55386a8b02?auto=format&fit=crop&w=800&q=80"
+                  class="w-full h-full object-cover"
+                  alt="Gallery main"
+                />
+                <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-slate-950/80 text-[10px] text-slate-100">
+                  <i class="fa-regular fa-image mr-1"></i>
+                  夜景 · 台场
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 mb-3">
+                <img
+                  src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-16 rounded-xl object-cover"
+                  alt="thumb"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1519055548599-6d4d12950823?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-16 rounded-xl object-cover"
+                  alt="thumb"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-16 rounded-xl object-cover"
+                  alt="thumb"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-16 rounded-xl object-cover"
+                  alt="thumb"
+                />
+                <img
+                  src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-16 rounded-xl object-cover"
+                  alt="thumb"
+                />
+                <div class="h-16 rounded-xl bg-slate-900 border border-slate-700 flex flex-col items-center justify-center text-[11px] text-slate-300">
+                  <i class="fa-solid fa-ellipsis text-lg mb-0.5"></i>
+                  查看全部
+                </div>
+              </div>
+
+              <p class="text-[10px] text-slate-300">
+                所有图片均来自 Unsplash 作为占位图，在正式开发中可替换为真实产品图片或 CDN 素材。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 日期 & 人数选择页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4">
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div>
+                    <p class="text-slate-400 text-[10px]">东京城市深度游</p>
+                    <p class="font-medium">选择日期 & 人数</p>
+                  </div>
+                </div>
+                <span class="text-slate-400">步骤 1/3</span>
+              </div>
+
+              <!-- 日历占位 -->
+              <div class="mt-2 rounded-2xl bg-slate-900 border border-slate-800 p-3 mb-3">
+                <div class="flex items-center justify-between text-[11px] mb-2">
+                  <button class="h-6 w-6 flex items-center justify-center rounded-full bg-slate-800">
+                    <i class="fa-solid fa-chevron-left text-[9px]"></i>
+                  </button>
+                  <span class="font-medium">2026 年 4 月</span>
+                  <button class="h-6 w-6 flex items-center justify-center rounded-full bg-slate-800">
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                  </button>
+                </div>
+                <div class="grid grid-cols-7 gap-1 text-[9px] text-center">
+                  <span class="text-slate-400">日</span>
+                  <span class="text-slate-400">一</span>
+                  <span class="text-slate-400">二</span>
+                  <span class="text-slate-400">三</span>
+                  <span class="text-slate-400">四</span>
+                  <span class="text-slate-400">五</span>
+                  <span class="text-slate-400">六</span>
+                  <!-- 简化日历行：仅作为 UI 占位 -->
+                  <span></span><span></span><span class="text-slate-300">1</span><span class="text-slate-300">2</span><span class="text-slate-300">3</span><span class="text-slate-300">4</span><span class="text-slate-300">5</span>
+                  <span class="text-slate-300">6</span><span class="text-slate-300">7</span><span class="text-slate-300">8</span>
+                  <span class="bg-sky-500 text-slate-950 rounded-full">9</span>
+                  <span class="bg-sky-500/40 text-slate-100 rounded-full">10</span>
+                  <span class="bg-sky-500/20 text-slate-100 rounded-full">11</span>
+                  <span class="bg-sky-500/20 text-slate-100 rounded-full">12</span>
+                  <span class="text-slate-500 line-through">13</span>
+                  <!-- 省略其他日期，仅示意 -->
+                </div>
+                <p class="mt-2 text-[10px] text-slate-400">
+                  已选择：
+                  <span class="text-sky-300 font-medium">4 月 9 日 - 4 月 12 日 · 3 晚</span>
+                </p>
+              </div>
+
+              <!-- 人数选择 -->
+              <div class="space-y-2 text-[11px]">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="font-medium">出行人</p>
+                    <p class="text-[10px] text-slate-400">最多 4 人 · 超出需补差价</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-800 text-slate-300">
+                      <i class="fa-solid fa-minus text-[9px]"></i>
+                    </button>
+                    <span class="w-6 text-center">2</span>
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-sky-500 text-slate-950">
+                      <i class="fa-solid fa-plus text-[9px]"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="text-[10px] text-slate-300">
+                    <p>儿童</p>
+                    <p class="text-slate-500">2-12 岁 · 享受儿童价</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-800 text-slate-300">
+                      <i class="fa-solid fa-minus text-[9px]"></i>
+                    </button>
+                    <span class="w-6 text-center">1</span>
+                    <button class="h-7 w-7 flex items-center justify-center rounded-full bg-slate-800 text-slate-300">
+                      <i class="fa-solid fa-plus text-[9px]"></i>
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <p class="font-medium mb-1">房型 / 行程类型</p>
+                  <div class="flex gap-2 text-[10px]">
+                    <button class="flex-1 px-2 py-1.5 rounded-xl bg-sky-500/15 border border-sky-500/60 text-sky-300">
+                      标准团 · 大巴
+                    </button>
+                    <button class="flex-1 px-2 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300">
+                      私家团 · 专车
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 底部按钮 -->
+              <div class="mt-auto pt-3">
+                <div class="flex items-center justify-between text-[10px] mb-1">
+                  <span class="text-slate-400">预计总价（含税）</span>
+                  <span class="text-emerald-300 text-sm font-semibold">¥14,899</span>
+                </div>
+                <button class="w-full py-2.5 rounded-full bg-gradient-to-r from-sky-500 to-emerald-400 text-slate-950 font-medium text-xs">
+                  下一步：填写预订信息
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 预订信息 & 支付 -->
+    <section id="booking" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">预订信息 / 支付 / 结果页</h3>
+        <span class="text-xs text-slate-400">Booking · Payment · Confirmation</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 预订信息确认 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div>
+                    <p class="text-[10px] text-slate-400">步骤 2/3</p>
+                    <p class="font-medium">填写预订信息</p>
+                  </div>
+                </div>
+                <span class="text-[10px] text-slate-400">行程摘要</span>
+              </div>
+
+              <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 mb-3">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <p class="text-[10px] text-slate-400">东京城市深度游·6 日 5 夜</p>
+                    <p class="text-[10px] text-slate-300 mt-1">
+                      出发：2026-04-09
+                    </p>
+                    <p class="text-[10px] text-slate-300">
+                      返回：2026-04-14
+                    </p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">
+                      2 成人 · 1 儿童 · 标准团
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-[10px] text-slate-400">总价</p>
+                    <p class="text-emerald-300 text-sm font-semibold">¥14,899</p>
+                    <p class="text-[9px] text-slate-500">含税费与服务费</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <div>
+                  <p class="font-medium mb-1">联系人信息</p>
+                  <div class="space-y-1.5 text-[10px]">
+                    <div>
+                      <label class="block mb-0.5 text-slate-300">姓名</label>
+                      <input
+                        type="text"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 outline-none"
+                        placeholder="与证件姓名一致"
+                      />
+                    </div>
+                    <div>
+                      <label class="block mb-0.5 text-slate-300">手机号</label>
+                      <input
+                        type="tel"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 outline-none"
+                        placeholder="用于接收行程短信"
+                      />
+                    </div>
+                    <div>
+                      <label class="block mb-0.5 text-slate-300">邮箱</label>
+                      <input
+                        type="email"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 outline-none"
+                        placeholder="用于接收电子行程单"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="font-medium mb-1">出行人信息</p>
+                  <div class="rounded-xl bg-slate-900 border border-slate-800 p-2 text-[10px]">
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center gap-2">
+                        <div class="h-7 w-7 rounded-full bg-slate-800 flex items-center justify-center">
+                          <i class="fa-regular fa-user text-xs"></i>
+                        </div>
+                        <div>
+                          <p class="text-slate-200">张三</p>
+                          <p class="text-slate-500 text-[9px]">成人 · 护照</p>
+                        </div>
+                      </div>
+                      <button class="text-sky-400 text-[10px]">编辑</button>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <p class="text-slate-400 text-[9px]">已填写 2/3 位出行人信息</p>
+                      <button class="text-[10px] text-sky-400">
+                        添加出行人
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="font-medium mb-1">备注</p>
+                  <textarea
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 outline-none text-[10px]"
+                    rows="2"
+                    placeholder="例如：需要儿童座椅 / 素食餐 / 高楼层房间等特殊需求"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="mt-auto pt-3">
+                <div class="flex items-center justify-between text-[10px] mb-1">
+                  <label class="inline-flex items-center gap-1 text-slate-400">
+                    <input type="checkbox" class="rounded border-slate-500 bg-slate-900" checked />
+                    我已阅读并同意
+                    <span class="text-sky-400 underline">预订须知</span>
+                  </label>
+                </div>
+                <button class="w-full py-2.5 rounded-full bg-sky-500 text-slate-950 font-medium text-xs">
+                  下一步：选择支付方式
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 支付页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div>
+                    <p class="text-[10px] text-slate-400">步骤 3/3</p>
+                    <p class="font-medium">确认并支付</p>
+                  </div>
+                </div>
+                <span class="text-[10px] text-emerald-300 flex items-center gap-1">
+                  <i class="fa-regular fa-clock"></i>
+                  预留 20 分钟
+                </span>
+              </div>
+
+              <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 mb-3">
+                <div class="flex items-center justify-between">
+                  <div class="text-[10px] text-slate-300">
+                    <p>订单金额</p>
+                    <p class="text-[9px] text-slate-500">含税费与服务费</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-emerald-300 text-lg font-semibold">¥14,899</p>
+                    <p class="text-[9px] text-slate-500">已使用优惠券 -¥300</p>
+                  </div>
+                </div>
+                <div class="mt-2 text-[10px] text-slate-400 space-y-0.5">
+                  <p class="flex justify-between">
+                    <span>基础团费</span>
+                    <span>¥14,199</span>
+                  </p>
+                  <p class="flex justify-between">
+                    <span>税费 / 附加费</span>
+                    <span>¥1,000</span>
+                  </p>
+                  <p class="flex justify-between">
+                    <span>优惠券</span>
+                    <span class="text-emerald-300">-¥300</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <p class="font-medium">选择支付方式</p>
+                <div class="space-y-1.5 text-[10px]">
+                  <label class="flex items-center justify-between rounded-xl bg-slate-900 border border-sky-500/70 px-3 py-2">
+                    <div class="flex items-center gap-2">
+                      <i class="fa-regular fa-credit-card text-sky-400 text-sm"></i>
+                      <div>
+                        <p class="text-slate-200">信用卡 / 借记卡</p>
+                        <p class="text-slate-500 text-[9px]">支持 Visa / Master / JCB</p>
+                      </div>
+                    </div>
+                    <input type="radio" name="pay" checked />
+                  </label>
+                  <label class="flex items-center justify-between rounded-xl bg-slate-900 border border-slate-800 px-3 py-2">
+                    <div class="flex items-center gap-2">
+                      <i class="fa-brands fa-cc-paypal text-sky-400 text-sm"></i>
+                      <div>
+                        <p class="text-slate-200">PayPal</p>
+                        <p class="text-slate-500 text-[9px]">支持外币支付</p>
+                      </div>
+                    </div>
+                    <input type="radio" name="pay" />
+                  </label>
+                  <label class="flex items-center justify-between rounded-xl bg-slate-900 border border-slate-800 px-3 py-2">
+                    <div class="flex items-center gap-2">
+                      <i class="fa-brands fa-weixin text-emerald-400 text-sm"></i>
+                      <div>
+                        <p class="text-slate-200">微信 / 支付宝</p>
+                        <p class="text-slate-500 text-[9px]">暂为占位，开发时接入 SDK</p>
+                      </div>
+                    </div>
+                    <input type="radio" name="pay" />
+                  </label>
+                </div>
+
+                <div class="mt-2 space-y-1 text-[10px]">
+                  <label class="inline-flex items-center gap-1 text-slate-400">
+                    <input type="checkbox" class="rounded border-slate-500 bg-slate-900" checked />
+                    同时开通出行提醒服务（免费）
+                  </label>
+                  <p class="text-slate-500">
+                    支付成功后，行程单将发送至你的邮箱与短信，请留意查收。
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-auto pt-3">
+                <div class="flex items-center justify-between text-[10px] mb-1">
+                  <p class="text-slate-400">应付金额</p>
+                  <p class="text-emerald-300 text-sm font-semibold">¥14,899</p>
+                </div>
+                <button class="w-full py-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-sky-500 text-slate-950 font-medium text-xs">
+                  确认支付
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 支付成功页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col items-center justify-center px-4 pb-4 text-[11px]">
+              <div class="w-16 h-16 rounded-full bg-emerald-400/10 border border-emerald-400/60 flex items-center justify-center mb-3">
+                <div class="w-10 h-10 rounded-full bg-emerald-400 flex items-center justify-center text-slate-950">
+                  <i class="fa-solid fa-check text-lg"></i>
+                </div>
+              </div>
+              <h2 class="text-lg font-semibold mb-1">支付成功！</h2>
+              <p class="text-[10px] text-slate-300 mb-3 text-center">
+                你的东京城市深度游已预订成功，行程单已发送至
+                <span class="text-sky-300">you@example.com</span>。
+              </p>
+
+              <div class="w-full rounded-2xl bg-slate-900 border border-slate-800 p-3 mb-3">
+                <div class="flex items-center justify-between text-[10px] mb-1">
+                  <span class="text-slate-400">预订编号</span>
+                  <span class="font-mono text-sky-300">TG202604091234</span>
+                </div>
+                <div class="flex items-center justify-between text-[10px]">
+                  <div>
+                    <p class="text-slate-300">东京城市深度游 · 6 日 5 夜</p>
+                    <p class="text-slate-500 text-[9px]">2026-04-09 至 2026-04-14</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-emerald-300 font-semibold">¥14,899</p>
+                    <p class="text-slate-500 text-[9px]">状态 · 已确认</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full grid grid-cols-2 gap-2 text-[10px] mb-3">
+                <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                  <i class="fa-regular fa-calendar-plus"></i>
+                  加入日历
+                </button>
+                <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                  <i class="fa-regular fa-share-from-square"></i>
+                  分享行程
+                </button>
+              </div>
+
+              <div class="w-full space-y-2">
+                <button class="w-full py-2.5 rounded-full bg-sky-500 text-slate-950 font-medium text-xs">
+                  查看我的行程
+                </button>
+                <button class="w-full py-2 rounded-full bg-slate-900 border border-slate-700 text-slate-100 text-xs">
+                  返回首页
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 行程 & 通知 -->
+    <section id="trips" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">我的行程 / 行程详情 / 通知中心</h3>
+        <span class="text-xs text-slate-400">Trips · Trip Detail · Notifications</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 我的行程列表 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="font-semibold">我的行程</h2>
+                <button class="flex items-center gap-1 text-[10px] text-sky-400">
+                  <i class="fa-regular fa-calendar-check text-[11px]"></i>
+                  新建行程
+                </button>
+              </div>
+
+              <div class="flex gap-2 mb-3 text-[10px]">
+                <button class="flex-1 py-1.5 rounded-full bg-sky-500 text-slate-950 font-medium">
+                  即将出行
+                </button>
+                <button class="flex-1 py-1.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+                  历史行程
+                </button>
+              </div>
+
+              <div class="space-y-2.5 overflow-y-auto">
+                <!-- 行程卡片 -->
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 flex gap-2">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1519817650390-64a93db511aa?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Trip"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <p class="text-[11px] font-medium">东京城市深度游 · 6 日</p>
+                      <span class="px-1.5 py-0.5 rounded-full bg-emerald-400/15 text-emerald-300 text-[9px]">
+                        已确认
+                      </span>
+                    </div>
+                    <p class="text-[10px] text-slate-400">
+                      2026-04-09 至 2026-04-14 · 3 人
+                    </p>
+                    <div class="flex items-center justify-between mt-1">
+                      <p class="text-[10px] text-slate-400">
+                        <i class="fa-regular fa-clock mr-1"></i>
+                        还有 32 天出发
+                      </p>
+                      <button class="text-[10px] text-sky-400">
+                        查看详情
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 flex gap-2">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Trip"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <p class="text-[11px] font-medium">巴厘岛亲子海岛 · 5 日</p>
+                      <span class="px-1.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 text-[9px]">
+                        待支付
+                      </span>
+                    </div>
+                    <p class="text-[10px] text-slate-400">
+                      2026-06-01 至 2026-06-05 · 4 人
+                    </p>
+                    <div class="flex items-center justify-between mt-1">
+                      <p class="text-[10px] text-slate-400">
+                        需在 23:59 前完成支付
+                      </p>
+                      <button class="text-[10px] text-emerald-300">
+                        去支付
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-900 border border-dashed border-slate-700 p-2.5 text-[10px] text-slate-400 text-center">
+                  没有更多即将出行的行程。
+                  <span class="text-sky-400 underline ml-1">去首页发现下一程旅行</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 行程详情页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <div>
+                    <p class="text-[10px] text-slate-400">行程详情</p>
+                    <p class="font-medium">东京城市深度游 · 6 日</p>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-400/15 text-emerald-300 text-[10px]">
+                  已确认
+                </span>
+              </div>
+
+              <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 mb-3 text-[10px]">
+                <div class="flex items-center justify-between mb-1">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar-check text-sky-400"></i>
+                    <div>
+                      <p class="text-slate-300">2026-04-09 至 2026-04-14</p>
+                      <p class="text-slate-500 text-[9px]">6 天 5 晚 · 东京</p>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-emerald-300 font-semibold">¥14,899</p>
+                    <p class="text-slate-500 text-[9px]">已全额支付</p>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[9px] text-slate-400">
+                  <p>预订编号：<span class="font-mono text-sky-300">TG202604091234</span></p>
+                  <button class="text-sky-400">查看订单详情</button>
+                </div>
+              </div>
+
+              <div class="space-y-2 mb-3 text-[10px]">
+                <p class="font-medium">日程安排</p>
+                <div class="rounded-xl bg-slate-900 border border-slate-800 p-2 space-y-1.5">
+                  <div class="flex gap-2">
+                    <div class="w-10 text-slate-400">Day 1</div>
+                    <div class="flex-1 text-slate-300">
+                      抵达东京 · 机场接机 · 入住酒店 · 新宿夜游。
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="w-10 text-slate-400">Day 2</div>
+                    <div class="flex-1 text-slate-300">
+                      浅草寺 · 晴空塔 · 传统和食晚餐。
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="w-10 text-slate-400">Day 3</div>
+                    <div class="flex-1 text-slate-300">
+                      镰仓 · 江之岛 · 海边日落。
+                    </div>
+                  </div>
+                  <button class="mt-1 text-sky-400 text-[10px]">
+                    查看完整日程 PDF
+                  </button>
+                </div>
+              </div>
+
+              <div class="space-y-2 mb-3 text-[10px]">
+                <p class="font-medium">乘客信息</p>
+                <div class="rounded-xl bg-slate-900 border border-slate-800 p-2 space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <div class="h-7 w-7 rounded-full bg-slate-800 flex items-center justify-center">
+                        <i class="fa-regular fa-user text-xs"></i>
+                      </div>
+                      <div>
+                        <p class="text-slate-200">张三</p>
+                        <p class="text-slate-500 text-[9px]">护照 · 成人</p>
+                      </div>
+                    </div>
+                    <button class="text-sky-400 text-[10px]">详情</button>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <div class="h-7 w-7 rounded-full bg-slate-800 flex items-center justify-center">
+                        <i class="fa-regular fa-user text-xs"></i>
+                      </div>
+                      <div>
+                        <p class="text-slate-200">李四</p>
+                        <p class="text-slate-500 text-[9px]">护照 · 儿童</p>
+                      </div>
+                    </div>
+                    <button class="text-sky-400 text-[10px]">详情</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-[10px]">
+                <p class="font-medium">客服与帮助</p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                    <i class="fa-regular fa-comments"></i>
+                    在线客服
+                  </button>
+                  <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    紧急电话
+                  </button>
+                  <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                    <i class="fa-regular fa-file-lines"></i>
+                    签证材料
+                  </button>
+                  <button class="flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100">
+                    <i class="fa-regular fa-circle-question"></i>
+                    常见问题
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 通知中心 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="font-semibold">通知中心</h2>
+                <button class="text-[10px] text-sky-400">全部标记为已读</button>
+              </div>
+
+              <div class="flex gap-2 mb-2 text-[10px]">
+                <button class="px-2 py-1 rounded-full bg-sky-500 text-slate-950">
+                  全部
+                </button>
+                <button class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+                  订单
+                </button>
+                <button class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+                  出行提醒
+                </button>
+                <button class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+                  活动
+                </button>
+              </div>
+
+              <div class="space-y-2 overflow-y-auto">
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 flex gap-2">
+                  <div class="h-8 w-8 rounded-full bg-emerald-400/10 flex items-center justify-center text-emerald-300">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                  <div class="flex-1 text-[10px]">
+                    <div class="flex items-center justify-between">
+                      <p class="text-slate-200">订单已确认</p>
+                      <span class="text-slate-500">1 分钟前</span>
+                    </div>
+                    <p class="text-slate-400 mt-0.5">
+                      你的东京城市深度游订单已确认，点击查看行程详情。
+                    </p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 flex gap-2 opacity-90">
+                  <div class="h-8 w-8 rounded-full bg-amber-400/10 flex items-center justify-center text-amber-300">
+                    <i class="fa-regular fa-bell"></i>
+                  </div>
+                  <div class="flex-1 text-[10px]">
+                    <div class="flex items-center justify-between">
+                      <p class="text-slate-200">出行提醒</p>
+                      <span class="text-slate-500">2 小时前</span>
+                    </div>
+                    <p class="text-slate-400 mt-0.5">
+                      你的航班将于 48 小时后起飞，请提前办理值机并准备好证件。
+                    </p>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 flex gap-2 opacity-80">
+                  <div class="h-8 w-8 rounded-full bg-sky-500/10 flex items-center justify-center text-sky-300">
+                    <i class="fa-solid fa-gift"></i>
+                  </div>
+                  <div class="flex-1 text-[10px]">
+                    <div class="flex items-center justify-between">
+                      <p class="text-slate-200">会员专属优惠</p>
+                      <span class="text-slate-500">昨天</span>
+                    </div>
+                    <p class="text-slate-400 mt-0.5">
+                      新用户立减 ¥300 优惠券已到账，可用于任意 5 日及以上行程。
+                    </p>
+                  </div>
+                </div>
+
+                <p class="text-[10px] text-slate-500 text-center mt-2">
+                  没有更多通知了。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 个人中心 -->
+    <section id="profile" class="space-y-6 mb-10">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-semibold">个人中心 / 收藏 / 设置</h3>
+        <span class="text-xs text-slate-400">Profile · Favorites · Settings</span>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+
+        <!-- 我的页面 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="font-semibold">我的</h2>
+                <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                  <i class="fa-solid fa-gear text-[11px]"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-3 mb-3">
+                <img
+                  src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80"
+                  class="h-10 w-10 rounded-full object-cover"
+                  alt="avatar"
+                />
+                <div class="flex-1">
+                  <p class="font-medium">旅行小行星</p>
+                  <p class="text-[10px] text-slate-400">
+                    旅行里程：<span class="text-sky-300">12,480 km</span>
+                  </p>
+                </div>
+                <div class="px-2 py-1 rounded-full bg-amber-400/15 text-amber-300 text-[10px] border border-amber-400/40">
+                  黄金会员
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-[10px] mb-3">
+                <button class="flex flex-col items-center justify-center py-2 rounded-2xl bg-slate-900 border border-slate-800 text-slate-100">
+                  <i class="fa-regular fa-calendar-check mb-1"></i>
+                  我的行程
+                </button>
+                <button class="flex flex-col items-center justify-center py-2 rounded-2xl bg-slate-900 border border-slate-800 text-slate-100">
+                  <i class="fa-regular fa-bookmark mb-1"></i>
+                  收藏
+                </button>
+                <button class="flex flex-col items-center justify-center py-2 rounded-2xl bg-slate-900 border border-slate-800 text-slate-100">
+                  <i class="fa-regular fa-credit-card mb-1"></i>
+                  优惠券
+                </button>
+              </div>
+
+              <div class="rounded-2xl bg-slate-900 border border-slate-800 p-2.5 mb-3 text-[10px]">
+                <p class="font-medium mb-1">会员专属福利</p>
+                <p class="text-slate-400 mb-2">
+                  本月还剩 2 次机场快速安检名额 · 1 次机场贵宾室体验。
+                </p>
+                <button class="px-3 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/60 text-sky-300 text-[10px]">
+                  查看会员权益
+                </button>
+              </div>
+
+              <div class="space-y-1 text-[11px]">
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-star text-amber-300"></i>
+                    <span>我的评价</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-question text-sky-300"></i>
+                    <span>帮助与客服</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+                <button class="w-full flex items-center justify-between py-2">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-gear text-slate-300"></i>
+                    <span>设置</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 收藏列表 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <h2 class="font-semibold">我的收藏</h2>
+                </div>
+                <button class="text-[10px] text-slate-400">编辑</button>
+              </div>
+
+              <div class="space-y-2 overflow-y-auto">
+                <div class="flex gap-2 rounded-2xl bg-slate-900 border border-slate-800 p-2">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Fav"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <p class="text-[11px] text-slate-200">
+                        冰岛极光追逐 · 7 日
+                      </p>
+                      <button class="text-rose-400 text-[11px]">
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400">
+                      人气极光团 · 全程保暖装备。
+                    </p>
+                    <div class="flex items-center justify-between mt-1">
+                      <p class="text-[10px] text-emerald-300">¥12,899 起</p>
+                      <button class="text-[10px] text-sky-400">
+                        查看详情
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex gap-2 rounded-2xl bg-slate-900 border border-slate-800 p-2">
+                  <div class="w-16 h-16 rounded-xl overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=400&q=80"
+                      class="w-full h-full object-cover"
+                      alt="Fav"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-0.5">
+                      <p class="text-[11px] text-slate-200">
+                        瑞士山水火车之旅 · 8 日
+                      </p>
+                      <button class="text-rose-400 text-[11px]">
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400">
+                      黄金列车 · 阿尔卑斯山景。
+                    </p>
+                    <div class="flex items-center justify-between mt-1">
+                      <p class="text-[10px] text-emerald-300">¥15,499 起</p>
+                      <button class="text-[10px] text-sky-400">
+                        查看详情
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-900 border border-dashed border-slate-700 p-2 text-[10px] text-slate-400 text-center">
+                  继续在首页探索更多目的地，点击心形图标即可收藏。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 设置页 -->
+        <div class="phone-frame mx-auto md:mx-0">
+          <div class="phone-inner flex flex-col bg-slate-950">
+            <div class="flex items-center justify-center py-2">
+              <div class="phone-notch"></div>
+            </div>
+            <div class="flex-1 flex flex-col px-4 pt-3 pb-4 text-[11px]">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <button class="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                  </button>
+                  <h2 class="font-semibold">设置</h2>
+                </div>
+              </div>
+
+              <div class="space-y-1 mb-3">
+                <p class="text-[10px] text-slate-500">账户</p>
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-user text-slate-300"></i>
+                    <span>个人信息</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-slate-300"></i>
+                    <span>账号安全</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+              </div>
+
+              <div class="space-y-1 mb-3">
+                <p class="text-[10px] text-slate-500">偏好</p>
+                <div class="flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-bell text-slate-300"></i>
+                    <span>推送通知</span>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" class="sr-only peer" checked />
+                    <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:bg-sky-500 relative">
+                      <div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition peer-checked:translate-x-4"></div>
+                    </div>
+                  </label>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-language text-slate-300"></i>
+                    <span>语言</span>
+                  </div>
+                  <div class="flex items-center gap-1 text-[10px] text-slate-300">
+                    <span>简体中文</span>
+                    <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-coins text-slate-300"></i>
+                    <span>货币</span>
+                  </div>
+                  <div class="flex items-center gap-1 text-[10px] text-slate-300">
+                    <span>CNY · 人民币</span>
+                    <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-moon text-slate-300"></i>
+                    <span>深色模式</span>
+                  </div>
+                  <span class="text-[10px] text-slate-400">已开启</span>
+                </div>
+              </div>
+
+              <div class="space-y-1 text-[11px]">
+                <p class="text-[10px] text-slate-500">关于</p>
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-question text-slate-300"></i>
+                    <span>帮助中心</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+                <button class="w-full flex items-center justify-between py-2 border-b border-slate-800/80">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-file-lines text-slate-300"></i>
+                    <span>用户协议 & 隐私政策</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-[9px] text-slate-500"></i>
+                </button>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-[10px] text-slate-500">版本号</span>
+                  <span class="text-[10px] text-slate-400">v1.0.0</span>
+                </div>
+              </div>
+
+              <button class="mt-3 w-full py-2.5 rounded-full bg-rose-500/10 border border-rose-500/60 text-rose-300 text-xs font-medium">
+                退出登录
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
